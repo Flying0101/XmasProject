@@ -9,9 +9,9 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Canvas camera={{ position: [0, 0, 35] }}>
           <Environment files="/xmasbackground.jpg" background />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[0, 0, 0]} />
-          <Candle position={[0, 0, 0]} scale={[2, 2, 2]} />
+          <ambientLight intensity={1} />
+          <pointLight position={[0, 4.5, 0]} />
+          <Candle position={[0, 0, 0]} scale={[0.5, 0.5, 0.5]} />
           <OrbitControls />
         </Canvas>
       </Suspense>
