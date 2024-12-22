@@ -1,0 +1,19 @@
+{
+  "name": "xmasproject-server",
+  "module": "index.ts",
+  "type": "module",
+
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1"
+  },
+  "scripts": {
+    "dev": "bun run index.ts",
+    "start": "bun run index.ts"
+  }
+}
