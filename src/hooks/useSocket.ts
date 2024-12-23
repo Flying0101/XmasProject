@@ -1,15 +1,17 @@
-// hooks/useSocket.ts
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
+type CandleState = [boolean, number]; // [isOn, length]
+type CandlesState = CandleState[];
+
 interface ServerToClientEvents {
-  candleState: (state: boolean) => void;
+  candleState: (state: CandlesState) => void;
   userCount: (count: number) => void;
 }
 
 interface ClientToServerEvents {
   joinRoom: () => void;
-  toggleCandle: (state: boolean) => void;
+  toggleCandle: (candleIndex: number) => void;
 }
 
 export function useSocket(url: string) {
@@ -17,7 +19,12 @@ export function useSocket(url: string) {
     () => io(url),
   );
   const [connected, setConnected] = useState(false);
-  const [candleState, setCandleState] = useState(false);
+  const [candlesState, setCandlesState] = useState<CandlesState>([
+    [false, 1],
+    [false, 1],
+    [false, 1],
+    [false, 1],
+  ]);
   const [userCount, setUserCount] = useState(0);
 
   useEffect(() => {
@@ -35,8 +42,8 @@ export function useSocket(url: string) {
     });
 
     socket.on("candleState", (state) => {
-      setCandleState(state);
-      console.log("Candle state:", state);
+      setCandlesState(state);
+      console.log("Candles state:", state);
     });
 
     socket.on("userCount", (count) => {
@@ -49,14 +56,14 @@ export function useSocket(url: string) {
     };
   }, [socket]);
 
-  const toggleCandle = () => {
-    const newState = !candleState;
-    socket.emit("toggleCandle", newState);
+  const toggleCandle = (candleIndex: number) => {
+    console.log("toggle", candleIndex);
+    socket.emit("toggleCandle", candleIndex);
   };
 
   return {
     connected,
-    candleState,
+    candlesState,
     userCount,
     toggleCandle,
     socket,
