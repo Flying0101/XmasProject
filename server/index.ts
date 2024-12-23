@@ -15,7 +15,7 @@ interface ClientToServerEvents {
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents>({
   cors: {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://161.35.210.135:5173"],
     methods: ["GET", "POST"],
   },
 });
