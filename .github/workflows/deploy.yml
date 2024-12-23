@@ -14,12 +14,11 @@ jobs:
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.DROPLET_PASSWORD }}
           script: |
             cd ~/apps/XmasProject
-            git pull
+            ${{ secrets.SCRIPT }}
             bun install
             cd server
             bun install
-            sudo systemctl restart julstake-app
-            sudo systemctl restart julstake-server
+            pm2 restart ./ecosystem.config.mjs
