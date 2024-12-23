@@ -13,7 +13,7 @@ interface CandleProps extends GroupProps {
 function Candle({ isOn, length, ...props }: CandleProps) {
   const groupRef = useRef<Group>(null);
   const flameGroupRef = useRef<Group>(null);
-  const currentScale = useRef(length); // Initialize with prop value
+  const currentScale = useRef(length);
   const currentRotation = useRef(0);
   const targetScale = useRef(length);
   const targetRotation = useRef(0);

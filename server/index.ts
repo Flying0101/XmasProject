@@ -25,7 +25,6 @@ const INITIAL_CANDLE_LENGTH = 1;
 const BURN_RATE = 0.1;
 const BURN_INTERVAL = 3000;
 
-// Initialize state with a function to ensure fresh reference
 const getInitialState = (): CandlesState => [
   [false, INITIAL_CANDLE_LENGTH],
   [false, INITIAL_CANDLE_LENGTH],
@@ -49,7 +48,6 @@ setInterval(() => {
     return;
   }
 
-  // Check if all candles are at zero length
   if (candlesState.every(([_, length]) => length === 0)) {
     resetCandles();
     return;
